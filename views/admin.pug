@@ -2,7 +2,25 @@ html
     head
         link(rel="stylesheet", href="./style.css")
         title= "my chat app"
+    body
+        header
+            h1= "Hi!"
+            form(action="/send", method="post", id="form")
+                input(type="text", name="name", placeholder="name")
+                input(type="text", name="message", placeholder="message")
+                input(type="submit", value="send")
+
+        #messagebored
+            each obj in message
+                .message
+                    h4= obj.name
+                    p= obj.message
+                    .inputs
+                        input(type="button", class="del", value="del", onclick="send(" + obj.id + ")")
+                        input(type="button", class="rw", value="rewrite", onclick="")
         script.
+            document.getElementsById("form").setAttribute("action", "/send/" + localStorage.getItem('key'));
+
             function send(objid) {
                 let h = new Headers();
                 h.append('Content-Type', 'application/json');
@@ -29,19 +47,3 @@ html
 
                 
             }
-    body
-        header
-            h1= "Hi!"
-            form(action="/send", method="post")
-                input(type="text", name="name", placeholder="name")
-                input(type="text", name="message", placeholder="message")
-                input(type="submit", value="send")
-
-        #messagebored
-            each obj in message
-                .message
-                    h4= obj.name
-                    p= obj.message
-                    .inputs
-                        input(type="button", class="del", value="del", onclick="send(" + obj.id + ")")
-                        input(type="button", class="rw", value="rewrite", onclick="")
