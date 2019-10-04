@@ -19,8 +19,6 @@ html
                         input(type="button", class="del", value="del", onclick="send(" + obj.id + ")")
                         input(type="button", class="rw", value="rewrite", onclick="")
         script.
-            document.getElementsById("form").setAttribute("action", "/send/" + localStorage.getItem('key'));
-
             function send(objid) {
                 let h = new Headers();
                 h.append('Content-Type', 'application/json');

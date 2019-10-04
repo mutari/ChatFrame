@@ -47,7 +47,6 @@ app.get('/:user', (req, res) => {
 
             if(err) console.log(err);
             else {
-
                 const AdminMessage = [res2[0], res2[1]];
                 res2 = res2.slice(2, res2.length).reverse();
                 res2.unshift(AdminMessage[0], AdminMessage[1])
@@ -72,23 +71,6 @@ app.post('/send', (req, res) => {
     });
 
     res.redirect("/");
-
-})
-
-app.post('/send/:user', (req, res) => {
-
-    if(req.params.user == pass) {
-        if(req.body.name.toLowerCase() == "admin") req.body.name += " 'Is this poster chitt?'"
-
-        con.query('INSERT INTO ChatFrame (name, message, date) VALUES (?, ?, NOW())', [req.body.name, req.body.message], (err, res) => {
-
-            if(err) console.log(err);
-            else console.log("data added to database");
-
-        });
-
-        res.redirect("/" + pass);
-    }
 
 })
 
