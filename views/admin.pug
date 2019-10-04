@@ -1,0 +1,47 @@
+html  
+    head
+        link(rel="stylesheet", href="./style.css")
+        title= "my chat app"
+        script.
+            function send(objid) {
+                let h = new Headers();
+                h.append('Content-Type', 'application/json');
+
+                let req = new Request('/test', {
+                    method: 'POST',
+                    headers: h,
+                    body: JSON.stringify({obj: objid, id: localStorage.getItem('key')})
+                });
+                console.log(req);
+
+                fetch(req)
+                        .then( (res) => {
+                            return res.json()
+                        })
+                        .then( (res) => {
+                            if(res.ok == "yes") {
+                                window.location.replace(window.location.href);
+                            }
+                        })
+                        .catch( (err) => {
+                            console.log('ERROR:', err.message);
+                        }); 
+
+                
+            }
+    body
+        header
+            h1= "Hi!"
+            form(action="/send", method="post")
+                input(type="text", name="name", placeholder="name")
+                input(type="text", name="message", placeholder="message")
+                input(type="submit", value="send")
+
+        #messagebored
+            each obj in message
+                .message
+                    h4= obj.name
+                    p= obj.message
+                    .inputs
+                        input(type="button", class="del", value="del", onclick="send(" + obj.id + ")")
+                        input(type="button", class="rw", value="rewrite", onclick="")

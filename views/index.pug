@@ -1,0 +1,17 @@
+html  
+    head
+        link(rel="stylesheet", href="./style.css")
+        title= "my chat app"
+    body
+        header
+            h1= "Hi!"
+            form(action="/send", method="post")
+                input(type="text", name="name", placeholder="name")
+                input(type="text", name="message", placeholder="message")
+                input(type="submit", value="send")
+
+        #messagebored
+            each obj in message
+                .message
+                    h4= obj.name
+                    p= obj.message
